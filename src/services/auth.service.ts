@@ -2,15 +2,21 @@ import axios from "axios";
 
 const API_URL = "https://tc-frontend.sebisedu.co.id/api/";
 
-interface LoginCreds {
+export interface LoginCreds {
   identity: string;
   password: string
 }
 
+export interface RegisterCreds {
+  email: string;
+  password: string;
+  role: 'visitor'
+}
+
 class AuthService {
-  login({ identity, password }: LoginCreds) {
+  login(payload: LoginCreds) {
     return axios
-      .post(API_URL + "auth/login", { identity, password })
+      .post(API_URL + "auth/login", payload)
       .then((response) => {
         if (response.data.access_Token) {
           localStorage.setItem("user", JSON.stringify(response.data));
@@ -24,11 +30,8 @@ class AuthService {
     localStorage.removeItem("user");
   }
 
-  register(email: string, password: string) {
-    return axios.post(API_URL + "signup", {
-      email,
-      password,
-    });
+  register(payload: RegisterCreds) {
+    return axios.post(API_URL + "auth/register", payload);
   }
 }
 
