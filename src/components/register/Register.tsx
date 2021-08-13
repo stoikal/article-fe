@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { RegisterCreds } from '../../services/auth.service';
@@ -53,6 +54,9 @@ const Register = () => {
         >
         Register
       </Button>
+      <br />
+      <br />
+      <Link to="/">login?</Link>
     </form>
   )
 };

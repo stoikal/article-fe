@@ -1,6 +1,7 @@
 import axios from "axios";
+import CONFIG from "../app/config";
 
-const API_URL = "https://tc-frontend.sebisedu.co.id/api/";
+const API_URL = CONFIG.BASE_URL;
 
 export interface LoginCreds {
   identity: string;
@@ -18,7 +19,7 @@ class AuthService {
     return axios
       .post(API_URL + "auth/login", payload)
       .then((response) => {
-        if (response.data.access_Token) {
+        if (response.data.access_token) {
           localStorage.setItem("user", JSON.stringify(response.data));
         }
 

@@ -7,6 +7,7 @@ import {
 import { Counter } from './components/counter/Counter';
 import Login from './components/login/Login';
 import Register from './components/register/Register';
+import PrivateRoute from './components/privateRoute/PrivateRoute';
 import './App.css';
 
 function App() {
@@ -14,14 +15,15 @@ function App() {
     <Router>
       <div className="App">
         <Switch>
+          {/* TODO remove Counter route and component */}
           <Route path="/counter">
             <Counter />
           </Route>
-          <Route path="/articles">
+          <PrivateRoute path="/articles">
             <div>
-              articles
+              article list here....
             </div>
-          </Route>
+          </PrivateRoute>
           <Route path="/register">
             <Register />
           </Route>

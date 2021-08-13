@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link, Redirect } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
@@ -16,7 +17,8 @@ const Login = () => {
   const auth = useAppSelector(selectAuth);
   const dispatch = useAppDispatch();
 
-  console.log(auth)
+  // FIXME looks like antipattern to me. multiple sources of truth
+  const user = auth.user || localStorage.getItem
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -38,6 +40,10 @@ const Login = () => {
     return !identity || !password
   })()
 
+  if (user.access_token) {
+    return <Redirect to="/articles" />
+  }
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -47,6 +53,7 @@ const Login = () => {
           variant="outlined" 
           onChange={handleInputChange}
         />
+        {/* FIXME use css instead */}
         <br />
         <br />
         <TextField 
@@ -65,6 +72,9 @@ const Login = () => {
         >
           login
         </Button>
+        <br />
+        <br />
+        <Link to="/register">register?</Link>
       </form> 
     </div>
   )
