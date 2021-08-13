@@ -4,9 +4,9 @@ import {
   Switch,
   Route,
 } from 'react-router-dom';
-import { Counter } from './features/counter/Counter';
-import Login from './features/login/Login';
-import Register from './features/register/Register';
+import { Counter } from './components/counter/Counter';
+import Login from './components/login/Login';
+import Register from './components/register/Register';
 import './App.css';
 
 function App() {

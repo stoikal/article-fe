@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
+import AuthService from '../../services/authservice';
 
 const Login = () => {
   const [formValue, setFormValue] = useState({ identity: '', password: '' })
@@ -10,14 +11,7 @@ const Login = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true)
-    axios({
-      method: 'post',
-      url: 'https://tc-frontend.sebisedu.co.id/api/auth/login',
-      data: formValue
-    })
-    .then((res) => {
-      console.log(res.status)
-    })
+    AuthService.login(formValue);
   }
 
   const handleInputChange = (evt: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
